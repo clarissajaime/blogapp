@@ -1,1 +1,11 @@
-h1 Test
+h1 New Post
+
+form(action="/" method="post")
+  div
+    label(for="title") Title:
+    input(type="text", name="title") 
+  div
+    label(for="body") Body:
+    textarea(name="body")
+  button(type="submit") Save Post
+  
