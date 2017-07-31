@@ -3,27 +3,9 @@ var router = express.Router();
 var MongoClient = require('mongodb').MongoClient
 var ObjectID = require('mongodb').ObjectID
 
-// posts = [
-//   {
-//     id: 1,
-//     title: "First blog post",
-//     content: "first post content"
-//   },
-//   {
-//     id: 2,
-//     title: "Second blog post",
-//     content: "second post content"
-//   },
-//   {
-//     id: 3,
-//     title: "third blog post",
-//     content: 'third post content'
-//   }
-// ];
-/* GET home page. */
 router.get('/', function(req, res, next) {
   MongoClient.connect('mongodb://localhost:27017/blogapp', function(err, db) {
-    if (err) console.log(err);
+    if (err) throw err;
 
     db.collection('blogposts').find().toArray(function (err, result) {
       res.render('index', { posts: result });
@@ -33,7 +15,7 @@ router.get('/', function(req, res, next) {
 
 router.post('/', function(req, res, next) {
   var title = req.body.title;
-  var content = req.body.body;
+  var content = req.body.content;
 
 
   MongoClient.connect('mongodb://localhost:27017/blogapp', function(err, db) {
@@ -48,6 +30,21 @@ router.post('/', function(req, res, next) {
   });
 });
 
+router.post('/delete', function(req, res, next) {
+  var id = new ObjectID(req.body._id);
+
+  MongoClient.connect('mongodb://localhost:27017/blogapp', function(err, db) {
+    if (err) throw err;
+
+    db.collection('blogposts').deleteOne({
+      "_id": id
+    }, function(err, result) {
+      res.redirect('/');
+    })
+  });
+});
+
+// /post/:id/edit
 router.get('/post/:id', function(req, res, next) {
   var id = new ObjectID(req.params.id);
 
@@ -57,6 +54,37 @@ router.get('/post/:id', function(req, res, next) {
     db.collection('blogposts').findOne({"_id": id}, function(err, result){
       console.log(result);
       res.render('post', result);
+    });
+  });
+});
+
+router.get('/post/:id/edit', function(req, res, next) {
+  var id = new ObjectID(req.params.id);
+
+  MongoClient.connect('mongodb://localhost:27017/blogapp', function(err, db) {
+    if (err) throw err;
+
+    db.collection('blogposts').findOne({"_id": id}, function(err, result){
+      console.log(result);
+      res.render('edit', result);
+    });
+  });
+});
+
+router.post('/post/:id', function(req, res, next) {
+  console.log(req.params.id);
+  var id = new ObjectID(req.params.id);
+  var title = req.body.title;
+  var content = req.body.content;
+
+  MongoClient.connect('mongodb://localhost:27017/blogapp', function(err, db) {
+    if (err) throw err;
+
+    db.collection('blogposts').updateOne({"_id": id}, {
+      $set: { "title": title, "content": content}
+    }, function(err, result){
+      console.log(result);
+      res.redirect('/post/' + id);
     });
   });
 });
