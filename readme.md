@@ -11,7 +11,6 @@ A blog application.
 [X] Blog posts must have a title and content
 [X] Edit blog post
 [ ] TODO: Remove '/post' from posts view
-
 [ ] Import Harmony Styles
 [ ] Only Admins can Add, Edit, Delete
 [ ] Improve index with truncated post

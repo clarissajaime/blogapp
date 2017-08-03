@@ -1,11 +1,14 @@
-h1 New Post
+extends layout
 
-form(action="/" method="post")
-  div
-    label(for="title") Title:
-    input(type="text", name="title", required) 
-  div
-    label(for="content") Content:
-    textarea(name="content", required)
-  button(type="submit") Save Post
+block content
+  h1 New Post
+
+  form(action="/" method="post")
+    div
+      label(for="title") Title:
+      input(type="text", name="title", required) 
+    div
+      label(for="content") Content:
+      textarea(name="content", required)
+    button(type="submit") Save Post
   

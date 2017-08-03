@@ -1,6 +1,10 @@
-h1= title
-p= content
-a(href="/post/" + _id + "/edit") Edit
-form(action="/delete" method="post")
-  input(type="hidden" name="_id" value=_id)
-  button(type="submit") Delete Post
+extends layout
+
+block content
+
+  h1= title
+  p= content
+  a(href="/post/" + _id + "/edit") Edit
+  form(action="/delete" method="post")
+    input(type="hidden" name="_id" value=_id)
+    button(type="submit") Delete Post
