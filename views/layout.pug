@@ -3,8 +3,14 @@ html
   head
     title= title
     block scripts
-      link(rel='stylesheet', href='/stylesheets/style.css')
-      link(rel='stylesheet', href='https://ddqt2avvbpaxu.cloudfront.net/cdn/v1/sc-mba/marketing/whitelabel.min.css')
+      link(rel='stylesheet', href='../stylesheets/style.css')
+      link(rel='stylesheet', href='https://ddqt2avvbpaxu.cloudfront.net/cdn/v1/corp-prod/marketing/whitelabel.min.css')
   body
+    header.navbar
+      div.container
+        a.navbar__brand(href="") Uni
+          ul.navbar__links
+            li.navbar__item.is--active  Link 1
+            li.navbar__item Link 2 
+            li.navbar__item Link 3
     block content
-      div.container.card

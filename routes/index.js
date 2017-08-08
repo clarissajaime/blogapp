@@ -13,7 +13,7 @@ router.get('/', function(req, res, next) {
   });
 });
 
-router.post('/', function(req, res, next) {
+router.post('/post', function(req, res, next) {
   var title = req.body.title;
   var content = req.body.content;
 
@@ -44,7 +44,10 @@ router.post('/delete', function(req, res, next) {
   });
 });
 
-// /post/:id/edit
+router.get('/post/new', function(req, res, next) {
+  res.render('new');
+});
+
 router.get('/post/:id', function(req, res, next) {
   var id = new ObjectID(req.params.id);
 
@@ -52,21 +55,7 @@ router.get('/post/:id', function(req, res, next) {
     if (err) throw err;
 
     db.collection('blogposts').findOne({"_id": id}, function(err, result){
-      console.log(result);
       res.render('post', result);
-    });
-  });
-});
-
-router.get('/post/:id/edit', function(req, res, next) {
-  var id = new ObjectID(req.params.id);
-
-  MongoClient.connect('mongodb://localhost:27017/blogapp', function(err, db) {
-    if (err) throw err;
-
-    db.collection('blogposts').findOne({"_id": id}, function(err, result){
-      console.log(result);
-      res.render('edit', result);
     });
   });
 });
@@ -83,14 +72,21 @@ router.post('/post/:id', function(req, res, next) {
     db.collection('blogposts').updateOne({"_id": id}, {
       $set: { "title": title, "content": content}
     }, function(err, result){
-      console.log(result);
       res.redirect('/post/' + id);
     });
   });
 });
 
-router.get('/new', function(req, res, next) {
-  res.render('new');
+router.get('/post/:id/edit', function(req, res, next) {
+  var id = new ObjectID(req.params.id);
+
+  MongoClient.connect('mongodb://localhost:27017/blogapp', function(err, db) {
+    if (err) throw err;
+
+    db.collection('blogposts').findOne({"_id": id}, function(err, result){
+      res.render('edit', result);
+    });
+  });
 });
 
 

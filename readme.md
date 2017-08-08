@@ -10,7 +10,10 @@ A blog application.
 [X] Delete blog post
 [X] Blog posts must have a title and content
 [X] Edit blog post
-[ ] TODO: Remove '/post' from posts view
-[ ] Import Harmony Styles
+[X] TODO: Make urls consistent
+[X] Import Harmony Styles
+[ ] Style with Harmony Classes
 [ ] Only Admins can Add, Edit, Delete
+[ ] Blog post can be designed with markdown
+[ ] Add ability to add media
 [ ] Improve index with truncated post

@@ -1,15 +1,13 @@
 extends layout
 
 block content
+  div.container.u--padding-6
+    h1 Edit Post
 
-  h1 Edit Post
-
-  form(action="/post/"+_id method="post")
-    div
-      label(for="title") Title:
-      input(type="text", name="title", value=title, required) 
-    div
-      label(for="content") Content:
-      textarea(name="content", required)= content
-    button(type="submit") Save Post
+    form(action="/post/"+_id method="post")
+      div
+        input.control.u--margin-bottom-2(type="text", name="title", value="Enter title here", required) 
+      div
+        textarea.control.u--margin-bottom-2(name="content", required)= content
+      button.button.button--primary(type="submit") Save Post
   

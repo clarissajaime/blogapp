@@ -1,10 +1,10 @@
 extends layout
 
 block content
-
-  h1= title
-  p= content
-  a(href="/post/" + _id + "/edit") Edit
-  form(action="/delete" method="post")
-    input(type="hidden" name="_id" value=_id)
-    button(type="submit") Delete Post
+  div.container.u--padding-6
+    h1= title
+    p= content
+    a(href="/post/" + _id + "/edit") Edit
+    form(action="/delete" method="post")
+      input(type="hidden" name="_id" value=_id)
+      button.button.button--danger(type="submit") Delete Post
